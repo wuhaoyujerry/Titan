@@ -18,7 +18,7 @@ public class MongoDBTableCreation {
 
 		// Step 2: create new collections, insert fake user data and create index.
 		db.getCollection("users").insertOne(new Document().append("first_name", "John").append("last_name", "Smith")
-				.append("password", "3229c1097c00d497a0fd282d586be050").append("user_id", "1111"));
+				.append("password", "d87bd3855a53d9f12cbfb860a7aac38f").append("user_id", "1111"));
 		// make sure user_id is unique.
 		IndexOptions indexOptions = new IndexOptions().unique(true);
 

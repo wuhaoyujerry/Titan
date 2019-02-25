@@ -44,23 +44,23 @@ public class SearchItem extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// allow access only if session exists
-		/*HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession(false);
 		if (session == null) {
 			response.setStatus(403);
 			return;
 		}
-		String userId = session.getAttribute("user_id").toString();*/
+		String userId = session.getAttribute("user_id").toString();
 
 		double lat = Double.parseDouble(request.getParameter("lat"));
 		double lon = Double.parseDouble(request.getParameter("lon"));
 		// Term can be empty or null.
-		String term = request.getParameter("term");
+		String term = request.getParameter("term");		
 
 		DBConnection connenction = DBConnectionFactory.getDBConnection();
 		List<Item> items = connenction.searchItems(term, lat, lon, term);
 
 		List<JSONObject> list = new ArrayList<>();
-		// Set<String> favorite = connenction.getFavoriteItemIds(userId);
+		Set<String> favorite = connenction.getFavoriteItemIds(userId);
 
 		try {
 			for (Item item : items) {
@@ -69,7 +69,7 @@ public class SearchItem extends HttpServlet {
 
 				// Check if this is a favorite one.
 				// This field is required by frontend to correctly display favorite items.
-				// obj.put("favorite", favorite.contains(item.getItemId()));
+				obj.put("favorite", favorite.contains(item.getItemId()));
 				list.add(obj);
 			}
 		} catch (Exception e) {

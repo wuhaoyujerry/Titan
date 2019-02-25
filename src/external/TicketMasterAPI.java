@@ -36,7 +36,7 @@ public class TicketMasterAPI {
 
 		// Make your url query part like:
 		// "apikey=12345&geoPoint=abcd&keyword=music&radius=50"
-		String query = String.format("apikey=%s&geoPoint=%s&keyword=%s&radius=%s", API_KEY, geoHash, term, 50);
+		String query = String.format("apikey=%s&geoPoint=%s&keyword=%s&radius=%s", API_KEY, geoHash, term, 100);
 		try {
 			// Open a HTTP connection between your Java application and TicketMaster based
 			// on url
